@@ -1,4 +1,4 @@
-package myFile
+package app
 
 import (
 	"fmt"
@@ -30,9 +30,11 @@ func uploadsHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	fmt.Fprint(w, filepath)
 }
-func NewHttpHanlder() http.Handler {
+
+//NewHTTPHanlder is for file upload
+func NewHTTPHanlder() http.Handler {
 	mux := http.NewServeMux()
-	mux.Handle("/", http.FileServer(http.Dir(`./myFile/public`)))
+	mux.Handle("/", http.FileServer(http.Dir(`./public`)))
 	mux.HandleFunc("/uploads", uploadsHandler)
 	return mux
 }

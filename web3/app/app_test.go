@@ -1,4 +1,4 @@
-package myFile
+package app
 
 import (
 	"bytes"
@@ -18,7 +18,7 @@ func TestUploadTest(t *testing.T) {
 	path := `C:\Users\Study\Desktop\images.png`
 	file, _ := os.Open(path)
 	defer file.Close()
-	os.RemoveAll("./uploads/")
+	os.RemoveAll("../uploads/")
 	buf := &bytes.Buffer{}
 	writer := multipart.NewWriter(buf)
 	multi, err1 := writer.CreateFormFile("upload_file", filepath.Base(path))
@@ -31,7 +31,7 @@ func TestUploadTest(t *testing.T) {
 	req.Header.Set("Content-type", writer.FormDataContentType())
 	uploadsHandler(res, req)
 	assert.Equal(http.StatusOK, res.Code)
-	uploadFilePath := "./uploads/" + filepath.Base(path)
+	uploadFilePath := `./uploads/` + filepath.Base(path)
 	_, err2 := os.Stat(uploadFilePath)
 	assert.NoError(err2)
 	uploadFile, _ := os.Open(uploadFilePath)
