@@ -1,2 +1,3 @@
-# goweb
-golang web 공부
+# GO WEB 공부
+## RESTful API 진행
+
